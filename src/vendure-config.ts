@@ -38,14 +38,14 @@ export const config: VendureConfig = {
             password: process.env.SUPERADMIN_PASSWORD,
         },
         cookieOptions: {
-          secret: process.env.COOKIE_SECRET,
+            secret: process.env.COOKIE_SECRET,
         },
     },
     dbConnectionOptions: {
         type: 'postgres',
         // See the README.md "Migrations" section for an explanation of
         // the `synchronize` and `migrations` options.
-        synchronize: false,
+        synchronize: true,
         migrations: [path.join(__dirname, './migrations/*.+(ts|js)')],
         logging: false,
         database: process.env.DB_NAME,
@@ -64,12 +64,7 @@ export const config: VendureConfig = {
     },
     // When adding or altering custom field definitions, the database will
     // need to be updated. See the "Migrations" section in README.md.
-    customFields: {
-        Product: [{
-            name: 'test',
-            type: 'string',
-        }]
-    },
+    customFields: {},
     plugins: [
         AssetServerPlugin.init({
             route: 'assets',
@@ -77,7 +72,7 @@ export const config: VendureConfig = {
             // If the MINIO_ENDPOINT environment variable is set, we'll use
             // Minio as the asset storage provider. Otherwise, we'll use the
             // default local provider.
-            storageStrategyFactory: process.env.MINIO_ENDPOINT ?  configureS3AssetStorage({
+            storageStrategyFactory: process.env.MINIO_ENDPOINT ? configureS3AssetStorage({
                 bucket: 'vendure-assets',
                 credentials: {
                     accessKeyId: process.env.MINIO_ACCESS_KEY,

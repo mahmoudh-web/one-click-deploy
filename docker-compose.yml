@@ -14,7 +14,7 @@ services:
       DB_PORT: 5432
       DB_NAME: vendure
       DB_USERNAME: postgres
-      DB_PASSWORD: password
+      DB_PASSWORD: universal123
   worker:
     build:
       context: .
@@ -27,7 +27,7 @@ services:
       DB_PORT: 5432
       DB_NAME: vendure
       DB_USERNAME: postgres
-      DB_PASSWORD: password
+      DB_PASSWORD: universal123
   database:
     image: postgres
     volumes:
@@ -35,5 +35,5 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: universal123
       POSTGRES_DB: vendure
